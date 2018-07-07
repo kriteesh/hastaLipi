@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	 <link href="https://fonts.googleapis.com/css?family=Biryani|Yatra+One" rel="stylesheet">
+  <script type="text/javascript" src="transliterate.js">
+    </script>
+    <script type="text/javascript">
+    // Load the Google Transliterate API
+    google.load("elements", "1", {
+        packages: "transliteration"
+    });
+    function onLoad() {
+        var options = {
+            sourceLanguage: google.elements.transliteration.LanguageCode.ENGLISH,
+            destinationLanguage: [google.elements.transliteration.LanguageCode.HINDI],
+            shortcutKey: 'ctrl+g',
+            transliterationEnabled: true
+        };
+        // Create an instance on TransliterationControl with the required
+        // options.
+        var control =
+            new google.elements.transliteration.TransliterationControl(options);
+        // Enable transliteration in the textbox with id
+        // 'transliterateTextarea'.
+        control.makeTransliteratable(['transliterateTextarea']);
+    }
+    google.setOnLoadCallback(onLoad);
+    </script>
+<style type="text/css">
+.msg{
+border-collapse: collapse;
+padding:4px 4px 4px 4px;
+font-size:24px;
+font-family: 'Yatra One', cursive;
+}
+.aa{
+padding:4px 4px 4px 4px;
+font-family: 'Biryani', sans-serif;
+}
+.main
+{
+padding:4px 4px 4px 4px;
+border-collapse: collapse;
+font-family: 'Biryani', sans-serif;
+}
+.bb
+{
+font-size:18px;
+font-family: 'Biryani', sans-serif;
+}
+.button {
+    background-color: #76ab1c;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px;
+    cursor: pointer;
+    font-family: 'Biryani', sans-serif;
+	}
+  .button:hover{
+    background-color:#4d6524;
+  }
+	.character{
+       border: none;
+    outline: none;
+    background: #616161;
+    text-align: center;
+    padding-left: 17px;
+    padding-right: 17px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* font-size: 16px; */
+    border-radius: 4px;
+    background: rgba(231, 89, 3, 0.62);
+    cursor: pointer;
+    font-family: 'Yatra One', cursive;
+  }
+  .character:hover{
+    background:rgba(231, 60, 3, 0.62);
+  }
+	#transliterateTextarea{
+	font-family: 'Yatra One', cursive;	
+	}
+	</style>
+  </head>
+  <body>
+  <center>
+<form id="etoh"> 
+<table class="main"> 
+<tr><td class="aa"></td><td class="msg" align="center">
+अंग्रेजी में हिंदी लिखें और स्पेस दबाकर देवनागरी लिपिकरण पाएँ | 
+</td><td class="aa"></td></tr>
+<tr><td class="aa"></td><td>
+<textarea class="js-copytextarea" id="transliterateTextarea" rows="12" cols="100" style="width:100%; max-width: 700px; height:auto;border: 1px dashed;padding: 10px;" placeholder="यहाँ लिखना प्रारम्भ करें ..." autofocus ></textarea></td><td class="aa"></td></tr>
+
+<tr><td class="aa"></td><td class="aa"><table cellpadding="5">
+<tr><td class="msg" style="font-family: 'Biryani', sans-serif;">विराम एवं अन्य वर्ण </td><td><button type="button" class="character" id="purnviram" OnClick="myFunction1()" title="पूर्ण विराम">&#2404;</button></td><td><button type="button" id="deerghviram" class="character" OnClick="myFunction2()" title="दीर्घ विराम">&#2405;</button></td><td><button type="button" id="laghav" class="character" OnClick="myFunction3()" title="लाघव चिन्ह">&#2416;</button></td><td><button type="button" id="om" class="character" OnClick="myFunction5()" title="ॐ">&#2384;</button></td></tr>
+</table></td><td class="aa"></td></tr>
+  
+ </table>
+ </form>
+  <table>
+	<tr>
+		<td><button class="js-textareacopybtn" style="background-color:#76ab1c; border: none; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 0px 0px; cursor: pointer; height:50px; font-family: 'Biryani', sans-serif;"onMouseOver="this.style.background='#4d6524'"onMouseOut="this.style.background='#76ab1c'">कॉपी करें </button></td>
+		<td><button class="button" onclick="saveTextAsFile()">टेक्स्ट फाइल रूप में सेव करें </button></td>
+		<td><button class="button" onclick="saveDocAsFile()" >डॉक फाइल रूप में सेव करें</button></td>
+	</tr>
+ </table>
+ <center>
+  </body>
+ 
+  <script type="text/javascript">
+ function myFunction1() {
+    etoh.transliterateTextarea.value+='।';
+	document.getElementById("transliterateTextarea").focus();
+}
+function myFunction2() {
+    etoh.transliterateTextarea.value+='॥';
+	document.getElementById("transliterateTextarea").focus();
+}
+function myFunction3() {
+    etoh.transliterateTextarea.value+='॰';
+	document.getElementById("transliterateTextarea").focus();
+}
+function myFunction5() {
+    etoh.transliterateTextarea.value+=' ॐ ';
+	document.getElementById("transliterateTextarea").focus();
+}
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("transliterateTextarea").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+	var fileNameToSaveAs = "indiatyping.txt";
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+// for save as doc file
+function saveDocAsFile()
+{
+    var textToSave = document.getElementById("transliterateTextarea").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/Doc"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    //var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+     var fileNameToSaveAs = "indiatyping.doc";
+	 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+// for copy text 
+   var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});
+ </script>
+ 
+</html> 
